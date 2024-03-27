@@ -25,10 +25,22 @@ class Game {
 
             if (newPosition <= Board.getSize()) {
                 int updatedPosition = board.getNewPosition(newPosition);
+                if (updatedPosition != newPosition) { // Check if the player hit a ladder or snake
+                    System.out.print(newPosition + ", " + currentPlayer.getName() + " hit a ");
+                    if (updatedPosition > newPosition) {
+                        System.out.print("ladder");
+                        System.out.println(" and move up from " + newPosition + " to " + updatedPosition);
+                    } else {
+                        System.out.print("snake");
+                        System.out.println(" and move down " + newPosition + " to " + updatedPosition);
+                    }
+                } else {
+                    System.out.println(updatedPosition + ".");
+                }
                 currentPlayer.setPosition(updatedPosition);
+            } else {
+                System.out.println(currentPosition + ". " + currentPlayer.getName() + " cannot move as the position exceeds 100.");
             }
-
-            System.out.println(currentPlayer.getPosition() + ".");
 
             if (currentPlayer.getPosition() == Board.getSize()) {
                 System.out.println(currentPlayer.getName() + " wins the game!");
